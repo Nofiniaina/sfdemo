@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Welcome to Blog {% endblock %}
+
+{% block body %}
+	<div class="w-full h-full px-10 flex flex-col gap-2">
+		<div class= "p-4 flex justify-between items-center gap-4">
+			<p class="text-2xl">Welcome to <span class="font-bold">demo app</span> of Symfony</p>
+			<div class="p-2 flex items-center gap-2 border-2 border-blue-light rounded cursor-pointer
+				hover:border-blue-hover">
+				<div class="flex items-center gap-2">
+					<twig:ux:icon name="tabler:world" class=""/>
+					English
+				</div>
+				<p>Choose language</p>
+			</div>
+		</div>
+		<div class="p-4 flex justify-center gap-4">
+			<div class="p-6 flex flex-col items-center gap-4 bg-blue-light rounded-md">
+				<p>Browse the <span class="font-bold">public section</span> of the demo application.</p>
+				<button class="p-2 flex items-center gap-2 bg-info text-white rounded cursor-pointer
+					hover:bg-blue-hover">
+					<twig:ux:icon name="tabler:users-group" class=""/>
+					<p>Browse application</p>
+				</button>
+			</div>
+			<div class="p-6 flex flex-col items-center gap-4 bg-blue-light rounded-md">
+				<p>Browse the <span class="font-bold">admin backend</span> of the demo application.</p>
+				<button class="p-2 flex gap-2 items-center bg-info text-white rounded cursor-pointer
+					hover:bg-blue-hover">
+					<twig:ux:icon name="tabler:lock" class=""/>
+					<p>Browse admin</p>
+				</button>
+			</div>
+		</div>
+	</div>
+{% endblock %}
