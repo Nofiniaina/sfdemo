@@ -8,5 +8,5 @@ default_redirect:
     path: /
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
     defaults:
-        route: home
+        route: welcome
         permanent: true

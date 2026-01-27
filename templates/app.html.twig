@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	{% block header %}
+		<header class="sticky px-4 py-4 flex justify-between items-center bg-blue-light">
+			<p class="italic text-2xl">Symfony <span class="text-base font-bold">demo</span></p>
+			<nav>
+				<ul class="flex justify-center items-center gap-4">
+					<li>
+						<a href="" class="flex items-center gap-1">
+							<twig:ux:icon name="tabler:home" class="w-5 h-5"/>
+							Homepage
+						</a>
+					</li>
+					<li>
+						<a href="" class="flex items-center gap-1">
+							<twig:ux:icon name="tabler:lock" class="w-5 h-5"/>
+							Admin
+						</a>
+					</li>
+					<li>
+						<a href="" class="flex items-center gap-1">
+							<twig:ux:icon name="tabler:search" class="w-5 h-5"/>
+							Search
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<a href="" class="p-2 flex items-center gap-1 border border-neutral-400 rounded 
+				 hover:border-blue-primary ">
+				<twig:ux:icon name="tabler:world" class="w-5 h-5"/>
+				Choose language
+			</a>
+		</header>
+	{% endblock %}
+
+	<main>
+		<div>
+			<div>
+				{% block main %}{% endblock %}
+			</div>
+			<aside>
+				{% block sidebar %}{% endblock %}
+			</aside>
+		</div>
+	</main>
+
+	{% block footer %}
+    <footer class="bg-background mt-auto">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-10 py-6">
+        <p class="text-text-subtle text-sm text-center">
+          © {{ "now"|date("Y") }} Symfony demo project by Nofiniaina
+        </p>
+      </div>
+    </footer>
+  {% endblock %}
+{% endblock %}
