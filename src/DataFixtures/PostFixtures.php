@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Post;
+use App\Entity\Tag;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -11,6 +12,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    public const POST_REFERENCE = 'post_';
 
     public function __construct(private SluggerInterface $slugger) {
     }
@@ -128,6 +131,32 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         // current index of the post the assign the user and vice versa
         $postIndex = 0;
 
+        // mapping the index of Post each Tag index related to it
+        $postTags = [
+            0  => [0, 4, 5, 1, 3],
+            1  => [1, 2, 6, 3],
+            2  => [7, 8, 0],
+            3  => [0, 9, 10, 11],
+            4  => [3, 6, 12, 18],
+            5  => [1, 13, 14, 3],
+            6  => [15, 16, 17, 0],
+            7  => [6, 19, 3, 0],
+            8  => [20, 21, 22],
+            9  => [23, 24, 0],
+            10 => [20, 26, 27],
+            11 => [1, 2, 13, 3],
+            12 => [32, 33],
+            13 => [20, 26, 27],
+            14 => [27, 30, 31, 10],
+            15 => [34, 35, 18],
+            16 => [28, 29, 27, 0],
+            17 => [1, 13, 14, 3],
+            18 => [36, 0, 20],
+            19 => [38, 27, 10],
+            20 => [39, 40, 41, 15],
+        ];
+
+
         for ($userIndex=1; $userIndex <= 4 ; $userIndex++) { 
             /** @var User $user */
             $user = $this->getReference(
@@ -145,7 +174,18 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
                 $post->setContent($postData['content']);
                 $post->setAuthor($user);
 
+                if(isset($postTags[$postIndex])) {
+                    foreach ($postTags[$postIndex] as $tagIndex) {
+                        $post->addTag(
+                            $this->getReference(TagFixtures::TAG_REFERENCE . $tagIndex,
+                                Tag::class
+                            )
+                        );
+                    }
+                }
+
                 $manager->persist($post);
+                $this->addReference(self::POST_REFERENCE . $postIndex, $post);
                 $postIndex++;
             }
         }
@@ -158,6 +198,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
+            TagFixtures::class,
         ];
     }
 }
