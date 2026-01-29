@@ -1,7 +1,43 @@
 {% extends 'app.html.twig' %}
-
-{% block title %}Hello BlogController!{% endblock %}
-
+{% block title %}Blog Posts{% endblock %}
 {% block main %}
-    Hello world
+  <div class="space-y-4">
+    {% for post in posts %}
+    <article class="bg-surface border border-border rounded hover:bg-background transition-colors cursor-pointer group">
+      <div class="p-5">
+        <a href="{{ path('blog.post.view', {slug: post.slug}) }}" 
+          class="text-text-primary hover:text-blue-primary font-medium text-lg transition-colors group-hover:underline">
+          {{ post.title }}
+        </a>
+        
+        <div class="flex flex-wrap items-center gap-4 mt-2 text-xs text-text-subtle">
+          <div class="flex items-center gap-1.5">
+            <twig:ux:icon name="tabler:calendar-month" class="w-3.5 h-3.5"/>
+            <span>{{ post.createdAt | date() }}</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <twig:ux:icon name="tabler:user" class="w-3.5 h-3.5"/>
+            <span class="text-text-secondary font-medium">{{ post.author.fullName }}</span>
+            <span class="text-text-subtle">@{{ post.author.username }}</span>
+          </div>
+        </div>
+        
+        <p class="mt-3 text-sm text-text-secondary line-clamp-2">
+          {{ post.summary }}
+        </p>
+        
+        {% if post.tags|length > 0 %}
+        <div class="flex flex-wrap items-center gap-2 mt-3">
+          {% for tag in post.tags %}
+            <a href="" class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-background text-text-secondary rounded hover:bg-border transition-colors">
+              <twig:ux:icon name="tabler:tag" class="w-3 h-3"/>
+              <span>{{ tag }}</span>
+            </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
 {% endblock %}

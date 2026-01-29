@@ -1,59 +1,69 @@
 {% extends "base.html.twig" %}
-
 {% block title %}{% endblock %}
-
 {% block body %}
-	{% block header %}
-		<header class="sticky px-4 py-4 flex justify-between items-center bg-blue-light">
-			<p class="italic text-2xl">Symfony <span class="text-base font-bold">demo</span></p>
-			<nav>
-				<ul class="flex justify-center items-center gap-4">
-					<li>
-						<a href="" class="flex items-center gap-1">
-							<twig:ux:icon name="tabler:home" class="w-5 h-5"/>
-							Homepage
-						</a>
-					</li>
-					<li>
-						<a href="" class="flex items-center gap-1">
-							<twig:ux:icon name="tabler:lock" class="w-5 h-5"/>
-							Admin
-						</a>
-					</li>
-					<li>
-						<a href="" class="flex items-center gap-1">
-							<twig:ux:icon name="tabler:search" class="w-5 h-5"/>
-							Search
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<a href="" class="p-2 flex items-center gap-1 border border-neutral-400 rounded 
-				 hover:border-blue-primary ">
-				<twig:ux:icon name="tabler:world" class="w-5 h-5"/>
-				Choose language
-			</a>
-		</header>
-	{% endblock %}
-
-	<main>
-		<div>
-			<div>
-				{% block main %}{% endblock %}
-			</div>
-			<aside>
-				{% block sidebar %}{% endblock %}
-			</aside>
-		</div>
-	</main>
-
-	{% block footer %}
-    <footer class="bg-background mt-auto">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-10 py-6">
-        <p class="text-text-subtle text-sm text-center">
-          © {{ "now"|date("Y") }} Symfony demo project by Nofiniaina
-        </p>
-      </div>
-    </footer>
-  {% endblock %}
+    {% block header %}
+        <header class="sticky top-0 z-50 px-6 py-3 flex justify-between items-center bg-surface border-b border-border">
+            <div class="flex items-center gap-8">
+                <a href="" class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-blue-primary rounded flex items-center justify-center">
+                        <span class="text-surface font-bold text-sm">SF</span>
+                    </div>
+                    <span class="text-text-primary italic font-semibold text-base">
+						Symfony Demo
+					</span>
+                </a>
+                
+                <nav>
+                    <ul class="flex items-center gap-1">
+                        <li>
+                            <a href="{{ path('blog.post')}}" class="flex items-center gap-1.5 px-3 py-1.5 text-sm text-text-secondary hover:bg-background hover:text-text-primary rounded transition-colors">
+                                <twig:ux:icon name="tabler:home" class="w-4 h-4"/>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="flex items-center gap-1.5 px-3 py-1.5 text-sm text-text-secondary hover:bg-background hover:text-text-primary rounded transition-colors">
+                                <twig:ux:icon name="tabler:lock" class="w-4 h-4"/>
+                                <span>Admin</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="flex items-center gap-1.5 px-3 py-1.5 text-sm text-text-secondary hover:bg-background hover:text-text-primary rounded transition-colors">
+                                <twig:ux:icon name="tabler:search" class="w-4 h-4"/>
+                                <span>Search</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <button class="flex items-center gap-1.5 px-3 py-1.5 text-sm text-text-secondary hover:bg-background hover:text-text-primary rounded transition-colors">
+                <twig:ux:icon name="tabler:world" class="w-4 h-4"/>
+                <span>EN</span>
+            </button>
+        </header>
+    {% endblock %}
+    
+    <main class="min-h-screen bg-background">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <div class="lg:col-span-3">
+                    {% block main %}{% endblock %}
+                </div>
+                <aside class="lg:col-span-1">
+                    {% block sidebar %}{% endblock %}
+                </aside>
+            </div>
+        </div>
+    </main>
+    
+    {% block footer %}
+        <footer class="bg-surface border-t border-border">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+                <p class="text-text-subtle text-xs">
+                    © {{ "now"|date("Y") }} Symfony demo · Created by Nofiniaina
+                </p>
+            </div>
+        </footer>
+    {% endblock %}
 {% endblock %}
