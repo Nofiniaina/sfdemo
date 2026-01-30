@@ -1,0 +1,20 @@
+{% if maxPage > 1 %}
+<div class="flex justify-center mt-8">
+	<twig:Pagination>
+    <twig:Pagination:Content>
+			{% if currentPage > 1 %}
+				<twig:Pagination:Item>
+					<twig:Pagination:Previous href="{{ path(route, {page: currentPage - 1}|merge(routeParams|default({}))) }}" />
+				</twig:Pagination:Item>
+			{% endif %}
+      
+      {% if currentPage < maxPage %}
+				<twig:Pagination:Item>
+					<twig:Pagination:Next href="{{ path(route, {page: currentPage + 1}|merge(routeParams|default({}))) }}" />
+				</twig:Pagination:Item>
+      {% endif %}
+    </twig:Pagination:Content>
+</twig:Pagination>
+
+</div>
+{% endif %}

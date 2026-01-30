@@ -41,4 +41,11 @@
     </article>
     {% endfor %}
   </div>
+
+  {# Pagination #}
+  {% include '_pagination.html.twig' with {
+    currentPage: page,
+    maxPage: maxPage,
+    route: 'blog.post'
+  } %}
 {% endblock %}

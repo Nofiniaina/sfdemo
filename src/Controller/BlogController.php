@@ -4,19 +4,25 @@ namespace App\Controller;
 
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class BlogController extends AbstractController
 {
     #[Route('/blog/post', name: 'blog.post')]
-    public function index(PostRepository $postRepo): Response
+    public function index(Request $request, PostRepository $postRepo): Response
     {
+        $page = $request->query->getInt('page', 1);
+        $limit = 5;
 
-        $posts = $postRepo->findAll();
+        $posts = $postRepo->paginatePost($page, $limit);
+        $maxPage = ceil($posts->count() / $limit);
 
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
+            'page' => $page,
+            'maxPage' => $maxPage,
         ]);
     }
 
