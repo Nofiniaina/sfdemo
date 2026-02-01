@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag
+class Tag implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,6 +27,11 @@ class Tag
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->name;
     }
 
     public function getId(): ?int
@@ -56,7 +61,7 @@ class Tag
 
     public function addPost(Post $post): static
     {
-        if (!$this->posts->contains($post)) {
+        if (! $this->posts->contains($post)) {
             $this->posts->add($post);
             $post->addTag($this);
         }
@@ -71,10 +76,5 @@ class Tag
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 }

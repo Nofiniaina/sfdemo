@@ -15,11 +15,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-
     use TimestampTrait;
 
     final public const ROLE_USER = 'ROLE_USER';
+
     final public const ROLE_EDITOR = 'ROLE_EDITOR';
+
     final public const ROLE_ADMIN = 'ROLE_ADMIN';
 
     #[ORM\Id]
@@ -193,7 +194,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addPost(Post $post): static
     {
-        if (!$this->posts->contains($post)) {
+        if (! $this->posts->contains($post)) {
             $this->posts->add($post);
             $post->setAuthor($this);
         }

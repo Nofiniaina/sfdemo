@@ -26,19 +26,21 @@ final class BlogController extends AbstractController
         ]);
     }
 
-    #[Route('/blog/post/create', name:'blog.post.create')]
-    public function create() {
-        return $this->render('blog/create.html.twig', [
-            
-        ]);
+    #[Route('/blog/post/create', name: 'blog.post.create')]
+    public function create(): Response
+    {
+        return $this->render('blog/create.html.twig', []);
     }
 
     #[Route('/blog/post/{slug}', name: 'blog.post.view')]
-    public function view(String $slug, PostRepository $postRepo) {
-        $post = $postRepo->findOneBy(['slug' => $slug]);
+    public function view(String $slug, PostRepository $postRepo): Response
+    {
+        $post = $postRepo->findOneBy([
+            'slug' => $slug,
+        ]);
 
         return $this->render('blog/view.html.twig', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 }

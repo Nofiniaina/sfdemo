@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\HasLifecycleCallbacks]
 class Post
 {
-
     use TimestampTrait;
 
     #[ORM\Id]
@@ -153,7 +152,7 @@ class Post
 
     public function addTag(Tag $tag): static
     {
-        if (!$this->tags->contains($tag)) {
+        if (! $this->tags->contains($tag)) {
             $this->tags->add($tag);
         }
 

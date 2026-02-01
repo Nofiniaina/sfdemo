@@ -4,7 +4,8 @@ namespace App\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
 
-trait TimestampTrait {
+trait TimestampTrait
+{
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {

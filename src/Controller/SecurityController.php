@@ -12,9 +12,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils, UserRepository $userRepo,
-    PostRepository $postRepo): Response
-    {
+    public function login(
+        AuthenticationUtils $authenticationUtils,
+        UserRepository $userRepo,
+        PostRepository $postRepo
+    ): Response {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
