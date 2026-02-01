@@ -7,7 +7,7 @@ on:
 
 jobs:
   quality:
-    name: Vulnerability check step
+    name: Ensure quality step
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
